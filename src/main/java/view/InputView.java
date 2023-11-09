@@ -32,6 +32,7 @@ public class InputView {
                 Map<String, Integer> menuAndPrice = Parser.parseIntegerList(input);
                 validateMenu(menuAndPrice);
                 validateQuantity(menuAndPrice);
+                validateOrderWithBeverageOnly(menuAndPrice);
                 return menuAndPrice;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -87,4 +88,25 @@ public class InputView {
             throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다");
         }
     }
+
+    private void validateOrderWithBeverageOnly(Map<String, Integer> menuAndPrice) {
+        boolean onlyDrinkFlag = checkIfOnlyDrinks(menuAndPrice);
+        if (onlyDrinkFlag) {
+            throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
+        }
+    }
+
+    private boolean checkIfOnlyDrinks(Map<String, Integer> menuAndPrice) {
+        List<String> drinknames = new ArrayList<>();
+        drinknames.add(Menu.DRINK_CHAMPAGNE.getName());
+        drinknames.add(Menu.DRINK_RED_WINE.getName());
+        drinknames.add(Menu.DRINK_ZERO_COLA.getName());
+        for (String menu : menuAndPrice.keySet()) {
+            if (!drinknames.contains(menu)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
