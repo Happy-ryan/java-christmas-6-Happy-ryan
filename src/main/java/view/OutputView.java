@@ -1,5 +1,6 @@
 package view;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 public class OutputView {
@@ -31,15 +32,17 @@ public class OutputView {
         System.out.println("<주문메뉴>");
     }
 
-    public static void printOderMenu(Map<String, Integer> order){
-        for(String menu : order.keySet()){
+    public static void printOderMenu(Map<String, Integer> order) {
+        for (String menu : order.keySet()) {
             System.out.println(menu + " " + order.get(menu) + "개");
         }
-
+        System.out.println();
     }
 
-    public static void printTotalOrderPriceMessage() {
+    public static void printTotalOrderPriceMessage(int totalOrderPrice) {
         System.out.println("<할인 전 총주문 금액>");
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        System.out.println(decimalFormat.format(totalOrderPrice) + "원");
     }
 
     public static void printBonusItemMessage() {
