@@ -42,11 +42,16 @@ public class OutputView {
     public static void printTotalOrderPriceMessage(int totalOrderPrice) {
         System.out.println("<할인 전 총주문 금액>");
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        System.out.println(decimalFormat.format(totalOrderPrice) + "원");
+        System.out.println(decimalFormat.format(totalOrderPrice) + "원\n");
     }
 
-    public static void printBonusItemMessage() {
+    public static void printBonusItemMessage(int totalOrderPrice) {
         System.out.println("<증정 메뉴>");
+        if (totalOrderPrice >= 120000) {
+            System.out.println("샴페인 1개");
+            return;
+        }
+        System.out.println("없음");
     }
 
     public static void printBenefitsMessage() {
