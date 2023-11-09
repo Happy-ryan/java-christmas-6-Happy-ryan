@@ -105,9 +105,9 @@ public class InputView {
 
     private boolean checkIfOnlyDrinks(Map<String, Integer> menuAndQuantity) {
         List<String> drinknames = new ArrayList<>();
-        drinknames.add(Menu.DRINK_CHAMPAGNE.getName());
-        drinknames.add(Menu.DRINK_RED_WINE.getName());
-        drinknames.add(Menu.DRINK_ZERO_COLA.getName());
+        drinknames.add(Menu.샴페인.getName());
+        drinknames.add(Menu.레드와인.getName());
+        drinknames.add(Menu.제로콜라.getName());
         for (String menu : menuAndQuantity.keySet()) {
             if (!drinknames.contains(menu)) {
                 return false;
