@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Console;
 import utils.Parser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +27,7 @@ public class InputView {
             try {
                 List<String> input = new ArrayList<>(List.of(Console.readLine().split(",")));
                 validateOrderFormat(input);
+                validateCheckForDuplicates(input);
                 Map<String, Integer> menuAndPrice = Parser.parseIntegerList(input);
                 return menuAndPrice;
             } catch (IllegalArgumentException e) {
@@ -53,6 +53,14 @@ public class InputView {
             if (!meneAndPrice.matches("^([가-힣]+-\\d+)")) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
+        }
+    }
+
+    private void validateCheckForDuplicates(List<String> menuAndPrices) {
+        int originalSize = menuAndPrices.size();
+        int parsedListSize = Parser.parseIntegerList(menuAndPrices).size();
+        if (originalSize != parsedListSize) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 }
