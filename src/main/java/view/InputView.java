@@ -1,6 +1,7 @@
 package view;
 
 import camp.nextstep.edu.missionutils.Console;
+import menu.Menu;
 import utils.Parser;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class InputView {
                 validateOrderFormat(input);
                 validateCheckForDuplicates(input);
                 Map<String, Integer> menuAndPrice = Parser.parseIntegerList(input);
+                validateMenu(menuAndPrice);
                 return menuAndPrice;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -61,6 +63,14 @@ public class InputView {
         int parsedListSize = Parser.parseIntegerList(menuAndPrices).size();
         if (originalSize != parsedListSize) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private void validateMenu(Map<String, Integer> menuAndPrice){
+        for(String menu : menuAndPrice.keySet()){
+            if(!Menu.contains(menu)){
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
         }
     }
 }
