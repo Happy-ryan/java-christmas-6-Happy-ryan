@@ -31,6 +31,7 @@ public class InputView {
                 validateCheckForDuplicates(input);
                 Map<String, Integer> menuAndPrice = Parser.parseIntegerList(input);
                 validateMenu(menuAndPrice);
+                validateQuantity(menuAndPrice);
                 return menuAndPrice;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -66,11 +67,24 @@ public class InputView {
         }
     }
 
-    private void validateMenu(Map<String, Integer> menuAndPrice){
-        for(String menu : menuAndPrice.keySet()){
-            if(!Menu.contains(menu)){
+    private void validateMenu(Map<String, Integer> menuAndPrice) {
+        for (String menu : menuAndPrice.keySet()) {
+            if (!Menu.contains(menu)) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
+        }
+    }
+
+    private void validateQuantity(Map<String, Integer> menuAndPrice) {
+        int totalQuantity = 0;
+        for (String menu : menuAndPrice.keySet()) {
+            if (menuAndPrice.get(menu) <= 0) {
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
+            totalQuantity += menuAndPrice.get(menu);
+        }
+        if (totalQuantity > 20) {
+            throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다");
         }
     }
 }
