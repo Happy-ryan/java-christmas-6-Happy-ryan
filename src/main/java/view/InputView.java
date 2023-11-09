@@ -29,11 +29,11 @@ public class InputView {
                 List<String> input = new ArrayList<>(List.of(Console.readLine().split(",")));
                 validateOrderFormat(input);
                 validateCheckForDuplicates(input);
-                Map<String, Integer> menuAndPrice = Parser.parseIntegerList(input);
-                validateMenu(menuAndPrice);
-                validateQuantity(menuAndPrice);
-                validateOrderWithBeverageOnly(menuAndPrice);
-                return menuAndPrice;
+                Map<String, Integer> menuAndQuantity = Parser.parseIntegerList(input);
+                validateMenu(menuAndQuantity);
+                validateQuantity(menuAndQuantity);
+                validateOrderWithBeverageOnly(menuAndQuantity);
+                return menuAndQuantity;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -52,56 +52,56 @@ public class InputView {
         }
     }
 
-    private void validateOrderFormat(List<String> menuAndPrices) {
-        for (String meneAndPrice : menuAndPrices) {
+    private void validateOrderFormat(List<String> menuAndQuantity) {
+        for (String meneAndPrice : menuAndQuantity) {
             if (!meneAndPrice.matches("^([가-힣]+-\\d+)")) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
     }
 
-    private void validateCheckForDuplicates(List<String> menuAndPrices) {
-        int originalSize = menuAndPrices.size();
-        int parsedListSize = Parser.parseIntegerList(menuAndPrices).size();
+    private void validateCheckForDuplicates(List<String> menuAndQuantity) {
+        int originalSize = menuAndQuantity.size();
+        int parsedListSize = Parser.parseIntegerList(menuAndQuantity).size();
         if (originalSize != parsedListSize) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
-    private void validateMenu(Map<String, Integer> menuAndPrice) {
-        for (String menu : menuAndPrice.keySet()) {
+    private void validateMenu(Map<String, Integer> menuAndQuantity) {
+        for (String menu : menuAndQuantity.keySet()) {
             if (!Menu.contains(menu)) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
     }
 
-    private void validateQuantity(Map<String, Integer> menuAndPrice) {
+    private void validateQuantity(Map<String, Integer> menuAndQuantity) {
         int totalQuantity = 0;
-        for (String menu : menuAndPrice.keySet()) {
-            if (menuAndPrice.get(menu) <= 0) {
+        for (String menu : menuAndQuantity.keySet()) {
+            if (menuAndQuantity.get(menu) <= 0) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
-            totalQuantity += menuAndPrice.get(menu);
+            totalQuantity += menuAndQuantity.get(menu);
         }
         if (totalQuantity > 20) {
             throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다");
         }
     }
 
-    private void validateOrderWithBeverageOnly(Map<String, Integer> menuAndPrice) {
-        boolean onlyDrinkFlag = checkIfOnlyDrinks(menuAndPrice);
+    private void validateOrderWithBeverageOnly(Map<String, Integer> menuAndQuantity) {
+        boolean onlyDrinkFlag = checkIfOnlyDrinks(menuAndQuantity);
         if (onlyDrinkFlag) {
             throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
         }
     }
 
-    private boolean checkIfOnlyDrinks(Map<String, Integer> menuAndPrice) {
+    private boolean checkIfOnlyDrinks(Map<String, Integer> menuAndQuantity) {
         List<String> drinknames = new ArrayList<>();
         drinknames.add(Menu.DRINK_CHAMPAGNE.getName());
         drinknames.add(Menu.DRINK_RED_WINE.getName());
         drinknames.add(Menu.DRINK_ZERO_COLA.getName());
-        for (String menu : menuAndPrice.keySet()) {
+        for (String menu : menuAndQuantity.keySet()) {
             if (!drinknames.contains(menu)) {
                 return false;
             }
