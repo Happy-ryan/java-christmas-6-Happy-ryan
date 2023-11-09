@@ -26,14 +26,8 @@ public class InputView {
         System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
         while (true) {
             try {
-                List<String> input = new ArrayList<>(List.of(Console.readLine().split(",")));
-                validateOrderFormat(input);
-                validateCheckForDuplicates(input);
-                Map<String, Integer> menuAndQuantity = Parser.parseIntegerList(input);
-                validateMenu(menuAndQuantity);
-                validateQuantity(menuAndQuantity);
-                validateOrderWithBeverageOnly(menuAndQuantity);
-                return menuAndQuantity;
+                Map<String, Integer> order = inputOrder();
+                return order;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -41,9 +35,22 @@ public class InputView {
     }
 
     private int inputDate() {
-        String day = Console.readLine();
-        validateNumber(day);
-        return Integer.parseInt(day);
+        String input = Console.readLine();
+        validateNumber(input);
+        return Integer.parseInt(input);
+    }
+
+    private Map<String, Integer> inputOrder(){
+        List<String> input = new ArrayList<>(List.of(Console.readLine().split(",")));
+        validateOrderFormat(input);
+        validateCheckForDuplicates(input);
+
+        Map<String, Integer> menuAndQuantity = Parser.parseIntegerList(input);
+        validateMenu(menuAndQuantity);
+        validateQuantity(menuAndQuantity);
+        validateOrderWithBeverageOnly(menuAndQuantity);
+
+        return menuAndQuantity;
     }
 
     private void validateNumber(String day) {
