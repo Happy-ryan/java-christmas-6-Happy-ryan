@@ -31,33 +31,33 @@ public class Calculrator {
 
     public Map<String, Integer> calculateBenefitByDate() {
         Map<String, Integer> benefitByDate = new HashMap<>();
-        int totalBenefitAmoun = 0;
+        int totalBenefitAmount = 0;
         if (Event.CHRISTMAS.getDates().contains(day)) {
             int christmasbenefit = calculateChristmasBebefit();
-            totalBenefitAmoun += christmasbenefit;
+            totalBenefitAmount += christmasbenefit;
             benefitByDate.put(Event.CHRISTMAS.getType(), christmasbenefit);
         }
         if (Event.WEEKDAY.getDates().contains(day)) {
             int weekdaybenefit = calculateWeekDayBenefit();
-            totalBenefitAmoun += weekdaybenefit;
+            totalBenefitAmount += weekdaybenefit;
             benefitByDate.put(Event.WEEKDAY.getType(), weekdaybenefit);
         }
         if (Event.WEEKEND.getDates().contains(day)) {
             int weekendbenefit = calculateWeekeendBenefit();
-            totalBenefitAmoun += weekendbenefit;
+            totalBenefitAmount += weekendbenefit;
             benefitByDate.put(Event.WEEKEND.getType(), weekendbenefit);
         }
         if (Event.SPECIAL.getDates().contains(day)) {
-            int specialbenefit = 1000;
-            totalBenefitAmoun += specialbenefit;
+            int specialbenefit = calculateSpecialBenefit();
+            totalBenefitAmount += specialbenefit;
             benefitByDate.put(Event.SPECIAL.getType(), specialbenefit);
         }
-        if (Event.GIFT.getDates().contains(day)) {
-            int giftbenefit = calculateBonusItemBenefit();
-            totalBenefitAmoun += giftbenefit;
+        if (Amount.TOTAL_ORDER.getValue() >= 120000) {
+            int giftbenefit = calculateGiftBenefit();
+            totalBenefitAmount += giftbenefit;
             benefitByDate.put(Event.GIFT.getType(), giftbenefit);
         }
-        Amount.TOTAL_BENEFIT.increaseAmount(totalBenefitAmoun);
+        Amount.TOTAL_BENEFIT.increaseAmount(totalBenefitAmount);
         return benefitByDate;
     }
 
@@ -79,12 +79,12 @@ public class Calculrator {
         return weekendbenefit;
     }
 
-    public int calculateBonusItemBenefit() {
-        int totalOrderPrice = calculateTotalOrderPrice();
-        if (totalOrderPrice >= 120000) {
-            return 25000;
-        }
-        return 0;
+    public int calculateGiftBenefit() {
+        return 25000;
+    }
+
+    private int calculateSpecialBenefit(){
+        return 1000;
     }
 
     private Map<String, Integer> countMainAndDessert() {
