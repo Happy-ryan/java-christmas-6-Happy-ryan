@@ -11,11 +11,14 @@ public class Calculrator {
     private final int day;
     private final Map<String, Integer> order;
 
-    Map<String, Integer> mainAndDessertCount = countMainAndDessert();
+    Map<String, Integer> mainAndDessertCount;
 
     public Calculrator(int day, Map<String, Integer> order) {
+        System.out.println("생성돼?");
         this.order = order;
         this.day = day;
+        this.mainAndDessertCount = new HashMap<>();
+        countMainAndDessert();
     }
 
     public int calculateTotalOrderPrice() {
@@ -78,7 +81,6 @@ public class Calculrator {
     }
 
     private Map<String, Integer> countMainAndDessert() {
-        mainAndDessertCount = new HashMap<>();
         int MainMenuCount = 0;
         int DessertMenutCount = 0;
         for (String menu : order.keySet()) {
