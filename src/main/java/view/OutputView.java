@@ -34,7 +34,7 @@ public class OutputView {
     }
 
     public static void printOderMenuMessage() {
-        System.out.println("<주문메뉴>");
+        System.out.println("<주문 메뉴>");
     }
 
     public static void printOderMenu(Map<String, Integer> order) {
@@ -98,11 +98,22 @@ public class OutputView {
     public static void printDiscountedPayment() {
         System.out.println(Amount.DISCOUNTED_PAYMENT.getDescription());
         System.out.println(Parser.formatNumberWithThousandsSeparator(Amount.DISCOUNTED_PAYMENT.getValue()));
+        System.out.println();
     }
 
     public static void printEventBadgeMessage() {
         System.out.println("<12월 이벤트 배지>");
+        if (5000 <= Amount.TOTAL_BENEFIT.getValue() && Amount.TOTAL_BENEFIT.getValue() < 10000) {
+            System.out.println("별");
+            return;
+        }
+        if (10000 <= Amount.TOTAL_BENEFIT.getValue() && Amount.TOTAL_BENEFIT.getValue() < 20000) {
+            System.out.println("트리");
+            return;
+        }
+        if (20000 <= Amount.TOTAL_BENEFIT.getValue()) {
+            System.out.println("산타");
+        }
     }
-
 }
 
