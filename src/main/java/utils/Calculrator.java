@@ -1,5 +1,6 @@
 package utils;
 
+import event.Event;
 import menu.Menu;
 import menu.MenuCategory;
 
@@ -23,6 +24,31 @@ public class Calculrator {
             totalOrderPrice += order.get(menu) * Menu.valueOf(menu).getPrice();
         }
         return totalOrderPrice;
+    }
+
+    public Map<String, Integer> calculateBenefitByDate() {
+        Map<String, Integer> benefitByDate = new HashMap<>();
+        if (Event.CHRISTMAS.getDates().contains(day)) {
+            int christmasbenefit = calculateChristmasBebefit();
+            benefitByDate.put(Event.CHRISTMAS.getType(), christmasbenefit);
+        }
+        if (Event.WEEKDAY.getDates().contains(day)) {
+            int weekdaybenefit = calculateWeekDayBenefit();
+            benefitByDate.put(Event.WEEKDAY.getType(), weekdaybenefit);
+        }
+        if (Event.WEEKEND.getDates().contains(day)) {
+            int weekendbenefit = calculateWeekeendBenefit();
+            benefitByDate.put(Event.WEEKEND.getType(), weekendbenefit);
+        }
+        if (Event.SPECIAL.getDates().contains(day)) {
+            int specialbenefit = 1000;
+            benefitByDate.put(Event.SPECIAL.getType(), specialbenefit);
+        }
+        if (Event.GIFT.getDates().contains(day)) {
+            int giftbenefit = calculateBonusItemBenefit();
+            benefitByDate.put(Event.GIFT.getType(), giftbenefit);
+        }
+        return benefitByDate;
     }
 
     public int calculateChristmasBebefit() {
