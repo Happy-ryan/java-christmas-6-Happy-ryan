@@ -19,7 +19,7 @@ public class Parser {
 
     public static String formatNumberWithThousandsSeparator(int number) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        return decimalFormat.format(number);
+        return decimalFormat.format(number) + "원";
     }
 
 }
