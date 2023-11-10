@@ -1,5 +1,6 @@
 package view;
 
+import amount.Amount;
 import event.Event;
 import menu.Menu;
 import utils.Parser;
@@ -56,7 +57,7 @@ public class OutputView {
     }
 
     public static void printTotalOrderPriceMessage(int totalOrderPrice) {
-        System.out.println("<할인 전 총주문 금액>");
+        System.out.println(Amount.TOTAL_ORDER.getDescription());
         String money = Parser.formatNumberWithThousandsSeparator(totalOrderPrice);
         System.out.println(money + "\n");
     }
@@ -79,7 +80,7 @@ public class OutputView {
             printBenefit(benefitType, benefifByDate.get(benefitType));
         }
         System.out.println();
-        printTotalBenefitAmountMessage(benefifByDate.get("totalBenefitAmount"));
+        printTotalBenefitAmountMessage();
     }
 
     private static void printBenefit(String benefitType, int benefit) {
@@ -88,13 +89,13 @@ public class OutputView {
         }
     }
 
-    public static void printTotalBenefitAmountMessage(int totalBenefitAmount) {
-        System.out.println("<총혜택 금액>");
-        System.out.println("-" + Parser.formatNumberWithThousandsSeparator(totalBenefitAmount));
+    public static void printTotalBenefitAmountMessage() {
+        System.out.println(Amount.TOTAL_BENEFIT.getDescription());
+        System.out.println("-" + Parser.formatNumberWithThousandsSeparator(Amount.TOTAL_BENEFIT.getValue()));
     }
 
     public static void printExpectedPaymentAmountMessage() {
-        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(Amount.DISCOUNTED_PAYMENT.getDescription());
     }
 
     public static void printEventBadgeMessage() {

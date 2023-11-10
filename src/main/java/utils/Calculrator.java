@@ -1,5 +1,6 @@
 package utils;
 
+import amount.Amount;
 import event.Event;
 import menu.Menu;
 import menu.MenuCategory;
@@ -22,11 +23,10 @@ public class Calculrator {
     }
 
     public int calculateTotalOrderPrice() {
-        int totalOrderPrice = 0;
         for (String menu : order.keySet()) {
-            totalOrderPrice += order.get(menu) * Menu.valueOf(menu).getPrice();
+            Amount.TOTAL_ORDER.increaseAmount(order.get(menu) * Menu.valueOf(menu).getPrice());
         }
-        return totalOrderPrice;
+        return Amount.TOTAL_ORDER.getValue();
     }
 
     public Map<String, Integer> calculateBenefitByDate() {
@@ -57,8 +57,7 @@ public class Calculrator {
             totalBenefitAmoun += giftbenefit;
             benefitByDate.put(Event.GIFT.getType(), giftbenefit);
         }
-        benefitByDate.put("totalBenefitAmount", totalBenefitAmoun);
-        benefitByDate.put("totalAfterExcludingGiftDiscount", totalBenefitAmoun -25000);
+        Amount.TOTAL_BENEFIT.increaseAmount(totalBenefitAmoun);
         return benefitByDate;
     }
 
