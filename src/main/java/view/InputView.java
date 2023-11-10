@@ -2,6 +2,7 @@ package view;
 
 import camp.nextstep.edu.missionutils.Console;
 import menu.Menu;
+import menu.MenuCategory;
 import utils.Parser;
 
 import java.util.ArrayList;
@@ -104,12 +105,8 @@ public class InputView {
     }
 
     private static boolean checkIfOnlyDrinks(Map<String, Integer> menuAndQuantity) {
-        List<String> drinknames = new ArrayList<>();
-        drinknames.add(Menu.샴페인.getName());
-        drinknames.add(Menu.레드와인.getName());
-        drinknames.add(Menu.제로콜라.getName());
         for (String menu : menuAndQuantity.keySet()) {
-            if (!drinknames.contains(menu)) {
+            if (!MenuCategory.DRINK.getMenuItems().contains(menu)) {
                 return false;
             }
         }
