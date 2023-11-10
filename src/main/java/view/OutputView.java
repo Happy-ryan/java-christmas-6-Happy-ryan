@@ -17,17 +17,10 @@ public class OutputView {
         System.out.println(date);
     }
 
-    public static void printOrder(Map<String, Integer> order) {
-        StringBuilder sb = new StringBuilder();
-        for (String menu : order.keySet()) {
-            sb.append(menu).append("-").append(order.get(menu)).append(",");
-        }
-        if (sb.length() > 0) {
-            sb.setLength(sb.length() - 1);
-        }
-        System.out.println(sb.toString());
+    public static void printOrder(Map<String, Integer> orderMap) {
+        String order = Parser.buildOrderString(orderMap);
+        System.out.println(order);
     }
-
 
     public static void printEventPreviewMessage(int date) {
         System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
