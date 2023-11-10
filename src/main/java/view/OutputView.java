@@ -111,7 +111,9 @@ public class OutputView {
         }
         if (20000 <= Amount.TOTAL_BENEFIT.getValue()) {
             System.out.println("산타");
+            return;
         }
+        System.out.println("없음");
     }
 }
 
