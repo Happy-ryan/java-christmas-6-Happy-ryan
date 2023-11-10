@@ -61,25 +61,25 @@ public class Calculrator {
         return benefitByDate;
     }
 
-    public int calculateChristmasBebefit() {
+    private int calculateChristmasBebefit() {
         int christmasBenefit = 0;
         christmasBenefit += 1000 + 100 * (day - 1);
         return christmasBenefit;
     }
 
-    public int calculateWeekDayBenefit() {
+    private int calculateWeekDayBenefit() {
         int weekdaybenefit = 0;
         weekdaybenefit += mainAndDessertCount.get("DESSERT") * 2023;
         return weekdaybenefit;
     }
 
-    public int calculateWeekeendBenefit() {
+    private int calculateWeekeendBenefit() {
         int weekendbenefit = 0;
         weekendbenefit += mainAndDessertCount.get("MAIN") * 2023;
         return weekendbenefit;
     }
 
-    public int calculateGiftBenefit() {
+    private int calculateGiftBenefit() {
         return 25000;
     }
 
