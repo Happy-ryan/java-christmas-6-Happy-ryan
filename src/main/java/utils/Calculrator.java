@@ -85,10 +85,10 @@ public class Calculrator {
         int DessertMenutCount = 0;
         for (String menu : order.keySet()) {
             if (MenuCategory.MAIN.getMenuItems().contains(menu)) {
-                MainMenuCount++;
+                MainMenuCount += order.get(menu);
             }
             if (MenuCategory.DESSERT.getMenuItems().contains(menu)) {
-                DessertMenutCount++;
+                DessertMenutCount += order.get(menu);
             }
         }
         mainAndDessertCount.put("MAIN", MainMenuCount);
