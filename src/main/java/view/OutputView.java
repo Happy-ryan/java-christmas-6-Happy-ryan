@@ -75,17 +75,22 @@ public class OutputView {
     }
 
     public static void printBenefit(Map<String, Integer> benefifByDate) {
-        for(String benefitType : benefifByDate.keySet()){
-           printBenefit(benefitType, benefifByDate.get(benefitType));
+        for (String benefitType : benefifByDate.keySet()) {
+            printBenefit(benefitType, benefifByDate.get(benefitType));
+        }
+        System.out.println();
+        printTotalBenefitAmountMessage(benefifByDate.get("totalBenefitAmount"));
+    }
+
+    private static void printBenefit(String benefitType, int benefit) {
+        if (!benefitType.equals("totalAfterExcludingGiftDiscount") && !benefitType.equals("totalBenefitAmount")) {
+            System.out.println(benefitType + " " + "-" + Parser.formatNumberWithThousandsSeparator(benefit));
         }
     }
 
-    private static void printBenefit(String benefitType, int benefit){
-        System.out.println(benefitType + " " + "-" + Parser.formatNumberWithThousandsSeparator(benefit));
-    }
-
-    public static void printTotalBenefitAmountMessage() {
+    public static void printTotalBenefitAmountMessage(int totalBenefitAmount) {
         System.out.println("<총혜택 금액>");
+        System.out.println("-" + Parser.formatNumberWithThousandsSeparator(totalBenefitAmount));
     }
 
     public static void printExpectedPaymentAmountMessage() {
