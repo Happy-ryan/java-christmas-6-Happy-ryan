@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Calculrator {
+    private final int day;
     private final Map<String, Integer> order;
 
     Map<String, Integer> mainAndDessertCount = countMainAndDessert();
 
-    public Calculrator(Map<String, Integer> order) {
+    public Calculrator(int day, Map<String, Integer> order) {
         this.order = order;
+        this.day = day;
     }
 
     public int calculateTotalOrderPrice() {
@@ -23,7 +25,7 @@ public class Calculrator {
         return totalOrderPrice;
     }
 
-    public int calculateChristmasBebefit(int day) {
+    public int calculateChristmasBebefit() {
         int christmasBenefit = 0;
         christmasBenefit += 1000 + 100 * (day - 1);
         return christmasBenefit;
