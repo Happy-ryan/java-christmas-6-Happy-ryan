@@ -57,6 +57,17 @@ public class Calculrator {
         return benefitByDate;
     }
 
+    public int calculateDiscountedPayment() {
+        Amount.DISCOUNTED_PAYMENT.add(Amount.TOTAL_ORDER);
+
+        Amount.DISCOUNTED_PAYMENT.minus(Amount.TOTAL_BENEFIT);
+
+        if (Amount.TOTAL_ORDER.getValue() > 120000) {
+            Amount.DISCOUNTED_PAYMENT.increaseAmount(25000);
+        }
+        return Amount.DISCOUNTED_PAYMENT.getValue();
+    }
+
     private int calculateChristmasBebefit() {
         int christmasBenefit = 0;
         christmasBenefit += 1000 + 100 * (day - 1);
