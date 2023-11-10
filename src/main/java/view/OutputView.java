@@ -30,7 +30,7 @@ public class OutputView {
 
 
     public static void printEventPreviewMessage(int date) {
-        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
+        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
     }
 
     public static void printOderMenuMessage() {
@@ -41,22 +41,21 @@ public class OutputView {
         for (String menu : order.keySet()) {
             System.out.println(menu + " " + order.get(menu) + "개");
         }
-        System.out.println();
     }
 
     public static void printTotalOrderPriceMessage() {
         System.out.println(Amount.TOTAL_ORDER.getDescription());
         String money = Parser.formatNumberWithThousandsSeparator(Amount.TOTAL_ORDER.getValue());
-        System.out.println(money + "\n");
+        System.out.println(money);
     }
 
     public static void printBonusItemMessage() {
         System.out.println("<증정 메뉴>");
         if (Amount.TOTAL_ORDER.getValue() >= 120000) {
-            System.out.println("샴페인 1개\n");
+            System.out.println("샴페인 1개");
             return;
         }
-        System.out.println("없음\n");
+        System.out.println("없음");
     }
 
     public static void printBenefitsMessage(Map<String, Integer> benefifByDate) {
@@ -67,7 +66,6 @@ public class OutputView {
         if (Amount.TOTAL_BENEFIT.getValue() == 0) {
             System.out.println("없음");
         }
-        System.out.println();
     }
 
     private static void printBenefit(String benefitType, int benefit) {
@@ -79,17 +77,15 @@ public class OutputView {
     public static void printTotalBenefitAmountMessage() {
         System.out.println(Amount.TOTAL_BENEFIT.getDescription());
         if (Amount.TOTAL_BENEFIT.getValue() == 0) {
-            System.out.println("0원\n");
+            System.out.println("0원");
             return;
         }
         System.out.println("-" + Parser.formatNumberWithThousandsSeparator(Amount.TOTAL_BENEFIT.getValue()));
-        System.out.println();
     }
 
     public static void printDiscountedPayment() {
         System.out.println(Amount.DISCOUNTED_PAYMENT.getDescription());
         System.out.println(Parser.formatNumberWithThousandsSeparator(Amount.DISCOUNTED_PAYMENT.getValue()));
-        System.out.println();
     }
 
     public static void printEventBadgeMessage() {
