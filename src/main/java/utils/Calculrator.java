@@ -12,13 +12,9 @@ public class Calculrator {
     private final int day;
     private final Map<String, Integer> order;
 
-    Map<String, Integer> mainAndDessertCount;
-
     public Calculrator(int day, Map<String, Integer> order) {
-        System.out.println("생성돼?");
         this.order = order;
         this.day = day;
-        this.mainAndDessertCount = new HashMap<>();
         countMainAndDessert();
     }
 
@@ -37,12 +33,12 @@ public class Calculrator {
             totalBenefitAmount += christmasbenefit;
             benefitByDate.put(Event.CHRISTMAS.getType(), christmasbenefit);
         }
-        if (Event.WEEKDAY.getDates().contains(day)) {
+        if (Event.WEEKDAY.getDates().contains(day) && MenuCategory.DESSERT.getCount() > 0) {
             int weekdaybenefit = calculateWeekDayBenefit();
             totalBenefitAmount += weekdaybenefit;
             benefitByDate.put(Event.WEEKDAY.getType(), weekdaybenefit);
         }
-        if (Event.WEEKEND.getDates().contains(day)) {
+        if (Event.WEEKEND.getDates().contains(day) && MenuCategory.MAIN.getCount() > 0) {
             int weekendbenefit = calculateWeekeendBenefit();
             totalBenefitAmount += weekendbenefit;
             benefitByDate.put(Event.WEEKEND.getType(), weekendbenefit);
@@ -69,13 +65,13 @@ public class Calculrator {
 
     private int calculateWeekDayBenefit() {
         int weekdaybenefit = 0;
-        weekdaybenefit += mainAndDessertCount.get("DESSERT") * 2023;
+        weekdaybenefit += MenuCategory.DESSERT.getCount() * 2023;
         return weekdaybenefit;
     }
 
     private int calculateWeekeendBenefit() {
         int weekendbenefit = 0;
-        weekendbenefit += mainAndDessertCount.get("MAIN") * 2023;
+        weekendbenefit += MenuCategory.MAIN.getCount() * 2023;
         return weekendbenefit;
     }
 
@@ -83,24 +79,19 @@ public class Calculrator {
         return 25000;
     }
 
-    private int calculateSpecialBenefit(){
+    private int calculateSpecialBenefit() {
         return 1000;
     }
 
-    private Map<String, Integer> countMainAndDessert() {
-        int MainMenuCount = 0;
-        int DessertMenutCount = 0;
+    private void countMainAndDessert() {
         for (String menu : order.keySet()) {
             if (MenuCategory.MAIN.getMenuItems().contains(menu)) {
-                MainMenuCount += order.get(menu);
+                MenuCategory.MAIN.increaseCount(order.get(menu));
             }
             if (MenuCategory.DESSERT.getMenuItems().contains(menu)) {
-                DessertMenutCount += order.get(menu);
+                MenuCategory.DESSERT.increaseCount(order.get(menu));
             }
         }
-        mainAndDessertCount.put("MAIN", MainMenuCount);
-        mainAndDessertCount.put("DESSERT", DessertMenutCount);
-        return mainAndDessertCount;
     }
 
 }
