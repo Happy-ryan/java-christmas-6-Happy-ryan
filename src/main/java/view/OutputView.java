@@ -58,7 +58,7 @@ public class OutputView {
     public static void printTotalOrderPriceMessage(int totalOrderPrice) {
         System.out.println("<할인 전 총주문 금액>");
         String money = Parser.formatNumberWithThousandsSeparator(totalOrderPrice);
-        System.out.println(money);
+        System.out.println(money + "\n");
     }
 
     public static void printBonusItemMessage(int totalOrderPrice) {
@@ -74,19 +74,14 @@ public class OutputView {
         System.out.println("<혜택 내역>");
     }
 
-    public static void printBenefit(int day, Map<String, Integer> order) {
-        if (Event.CHRISTMAS.getDates().contains(day)) {
-            System.out.println();
+    public static void printBenefit(Map<String, Integer> benefifByDate) {
+        for(String benefitType : benefifByDate.keySet()){
+           printBenefit(benefitType, benefifByDate.get(benefitType));
         }
-        if (Event.WEEKDAY.getDates().contains(day)) {
-            System.out.println();
-        }
-        if (Event.WEEKEND.getDates().contains(day)) {
-            System.out.println();
-        }
-        if (Event.SPECIAL.getDates().contains(day)) {
-            System.out.println();
-        }
+    }
+
+    private static void printBenefit(String benefitType, int benefit){
+        System.out.println(benefitType + " " + "-" + Parser.formatNumberWithThousandsSeparator(benefit));
     }
 
     public static void printTotalBenefitAmountMessage() {
