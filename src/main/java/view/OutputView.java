@@ -71,17 +71,15 @@ public class OutputView {
         System.out.println("없음\n");
     }
 
-    public static void printBenefitsMessage() {
+    public static void printBenefitsMessage(Map<String, Integer> benefifByDate) {
         System.out.println("<혜택 내역>");
-    }
-
-    public static void printBenefit(Map<String, Integer> benefifByDate) {
         for (String benefitType : benefifByDate.keySet()) {
             printBenefit(benefitType, benefifByDate.get(benefitType));
         }
         System.out.println();
         printTotalBenefitAmountMessage();
     }
+
 
     private static void printBenefit(String benefitType, int benefit) {
         if (!benefitType.equals("totalAfterExcludingGiftDiscount") && !benefitType.equals("totalBenefitAmount")) {
