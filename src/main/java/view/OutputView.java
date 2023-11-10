@@ -92,10 +92,12 @@ public class OutputView {
     public static void printTotalBenefitAmountMessage() {
         System.out.println(Amount.TOTAL_BENEFIT.getDescription());
         System.out.println("-" + Parser.formatNumberWithThousandsSeparator(Amount.TOTAL_BENEFIT.getValue()));
+        System.out.println();
     }
 
-    public static void printExpectedPaymentAmountMessage() {
+    public static void printDiscountedPayment() {
         System.out.println(Amount.DISCOUNTED_PAYMENT.getDescription());
+        System.out.println(Parser.formatNumberWithThousandsSeparator(Amount.DISCOUNTED_PAYMENT.getValue()));
     }
 
     public static void printEventBadgeMessage() {
