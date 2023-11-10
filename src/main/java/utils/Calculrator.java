@@ -57,41 +57,51 @@ public class Calculrator {
         return benefitByDate;
     }
 
-    public int calculateDiscountedPayment() {
+    public void calculateDiscountedPayment() {
         Amount.DISCOUNTED_PAYMENT.add(Amount.TOTAL_ORDER);
 
         Amount.DISCOUNTED_PAYMENT.minus(Amount.TOTAL_BENEFIT);
-
         if (Amount.TOTAL_ORDER.getValue() > 120000) {
             Amount.DISCOUNTED_PAYMENT.increaseAmount(25000);
         }
-        return Amount.DISCOUNTED_PAYMENT.getValue();
     }
 
     private int calculateChristmasBebefit() {
         int christmasBenefit = 0;
-        christmasBenefit += 1000 + 100 * (day - 1);
+        if (Amount.TOTAL_ORDER.getValue() >= 10000) {
+            christmasBenefit = 1000 + 100 * (day - 1);
+        }
         return christmasBenefit;
     }
 
     private int calculateWeekDayBenefit() {
         int weekdaybenefit = 0;
-        weekdaybenefit += MenuCategory.DESSERT.getCount() * 2023;
+        if (Amount.TOTAL_ORDER.getValue() >= 10000) {
+            weekdaybenefit = MenuCategory.DESSERT.getCount() * 2023;
+        }
         return weekdaybenefit;
     }
 
     private int calculateWeekeendBenefit() {
         int weekendbenefit = 0;
-        weekendbenefit += MenuCategory.MAIN.getCount() * 2023;
+        if (Amount.TOTAL_ORDER.getValue() >= 10000) {
+            weekendbenefit = MenuCategory.MAIN.getCount() * 2023;
+        }
         return weekendbenefit;
     }
 
     private int calculateGiftBenefit() {
-        return 25000;
+        if (Amount.TOTAL_ORDER.getValue() >= 10000) {
+            return 25000;
+        }
+        return 0;
     }
 
     private int calculateSpecialBenefit() {
-        return 1000;
+        if (Amount.TOTAL_ORDER.getValue() >= 10000) {
+            return 1000;
+        }
+        return 0;
     }
 
     private void countMainAndDessert() {
