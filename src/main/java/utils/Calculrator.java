@@ -23,6 +23,12 @@ public class Calculrator {
         return totalOrderPrice;
     }
 
+    public int calculateChristmasBebefit(int day) {
+        int christmasBenefit = 0;
+        christmasBenefit += 1000 + 100 * (day - 1);
+        return christmasBenefit;
+    }
+
     public int calculateWeekDayBenefit() {
         int weekdaybenefit = 0;
         weekdaybenefit += mainAndDessertCount.get("DESSERT") * 2023;
@@ -33,6 +39,14 @@ public class Calculrator {
         int weekendbenefit = 0;
         weekendbenefit += mainAndDessertCount.get("MAIN") * 2023;
         return weekendbenefit;
+    }
+
+    public int calculateBonusItemBenefit() {
+        int totalOrderPrice = calculateTotalOrderPrice();
+        if (totalOrderPrice >= 120000) {
+            return 25000;
+        }
+        return 0;
     }
 
     private Map<String, Integer> countMainAndDessert() {
