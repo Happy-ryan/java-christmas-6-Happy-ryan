@@ -67,3 +67,4 @@
 
 6. utils
 - [x] `List<String>` -> `Map<String, Integer>`로 변경하는 메서드
+- [x] `int` -> `String` & 1000단위 쉼표(,) 메서드

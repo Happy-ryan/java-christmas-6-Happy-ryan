@@ -1,5 +1,9 @@
 package view;
 
+import event.Event;
+import menu.Menu;
+import utils.Parser;
+
 import java.text.DecimalFormat;
 import java.util.Map;
 
@@ -41,21 +45,36 @@ public class OutputView {
 
     public static void printTotalOrderPriceMessage(int totalOrderPrice) {
         System.out.println("<할인 전 총주문 금액>");
-        DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        System.out.println(decimalFormat.format(totalOrderPrice) + "원\n");
+        String money = Parser.formatNumberWithThousandsSeparator(totalOrderPrice);
+        System.out.println(money);
     }
 
     public static void printBonusItemMessage(int totalOrderPrice) {
         System.out.println("<증정 메뉴>");
         if (totalOrderPrice >= 120000) {
-            System.out.println("샴페인 1개");
+            System.out.println("샴페인 1개\n");
             return;
         }
-        System.out.println("없음");
+        System.out.println("없음\n");
     }
 
     public static void printBenefitsMessage() {
         System.out.println("<혜택 내역>");
+    }
+
+    public static void printBenefit(int day, Map<String, Integer> order){
+        if(Event.CHRISTMAS.getDates().contains(day)){
+            System.out.println();
+        }
+        if(Event.WEEKDAY.getDates().contains(day)){
+            System.out.println();
+        }
+        if(Event.WEEKEND.getDates().contains(day)){
+            System.out.println();
+        }
+        if(Event.SPECIAL.getDates().contains(day)){
+            System.out.println();
+        }
     }
 
     public static void printTotalBenefitAmountMessage() {

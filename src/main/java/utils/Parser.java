@@ -1,5 +1,6 @@
 package utils;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,4 +16,10 @@ public class Parser {
         }
         return parsedMap;
     }
+
+    public static String formatNumberWithThousandsSeparator(int number) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        return decimalFormat.format(number);
+    }
+
 }
