@@ -56,15 +56,15 @@ public class OutputView {
         System.out.println("<12월 이벤츠 배지>\n없음");
     }
 
-    public static void printTotalOrderPriceMessage(int totalOrderPrice) {
+    public static void printTotalOrderPriceMessage() {
         System.out.println(Amount.TOTAL_ORDER.getDescription());
-        String money = Parser.formatNumberWithThousandsSeparator(totalOrderPrice);
+        String money = Parser.formatNumberWithThousandsSeparator(Amount.TOTAL_ORDER.getValue());
         System.out.println(money + "\n");
     }
 
-    public static void printBonusItemMessage(int totalOrderPrice) {
+    public static void printBonusItemMessage() {
         System.out.println("<증정 메뉴>");
-        if (totalOrderPrice >= 120000) {
+        if (Amount.TOTAL_ORDER.getValue() >= 120000) {
             System.out.println("샴페인 1개\n");
             return;
         }
