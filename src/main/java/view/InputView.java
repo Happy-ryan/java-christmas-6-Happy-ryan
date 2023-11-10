@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class InputView {
 
-    public int readDate() {
+    public static int readDate() {
         System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
         while (true) {
             try {
@@ -22,7 +22,7 @@ public class InputView {
         }
     }
 
-    public Map<String, Integer> readOrder() {
+    public static Map<String, Integer> readOrder() {
         System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
         while (true) {
             try {
@@ -34,13 +34,13 @@ public class InputView {
         }
     }
 
-    private int inputDate() {
+    private static int inputDate() {
         String input = Console.readLine();
         validateNumber(input);
         return Integer.parseInt(input);
     }
 
-    private Map<String, Integer> inputOrder(){
+    private static Map<String, Integer> inputOrder() {
         List<String> input = new ArrayList<>(List.of(Console.readLine().split(",")));
         validateOrderFormat(input);
         validateCheckForDuplicates(input);
@@ -53,13 +53,13 @@ public class InputView {
         return menuAndQuantity;
     }
 
-    private void validateNumber(String day) {
+    private static void validateNumber(String day) {
         if (!day.matches("(3[01]|[12][0-9]|[1-9])")) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }
 
-    private void validateOrderFormat(List<String> menuAndQuantity) {
+    private static void validateOrderFormat(List<String> menuAndQuantity) {
         for (String meneAndPrice : menuAndQuantity) {
             if (!meneAndPrice.matches("^([가-힣]+-\\d+)")) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
@@ -67,7 +67,7 @@ public class InputView {
         }
     }
 
-    private void validateCheckForDuplicates(List<String> menuAndQuantity) {
+    private static void validateCheckForDuplicates(List<String> menuAndQuantity) {
         int originalSize = menuAndQuantity.size();
         int parsedListSize = Parser.parseIntegerList(menuAndQuantity).size();
         if (originalSize != parsedListSize) {
@@ -75,7 +75,7 @@ public class InputView {
         }
     }
 
-    private void validateMenu(Map<String, Integer> menuAndQuantity) {
+    private static void validateMenu(Map<String, Integer> menuAndQuantity) {
         for (String menu : menuAndQuantity.keySet()) {
             if (!Menu.contains(menu)) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
@@ -83,7 +83,7 @@ public class InputView {
         }
     }
 
-    private void validateQuantity(Map<String, Integer> menuAndQuantity) {
+    private static void validateQuantity(Map<String, Integer> menuAndQuantity) {
         int totalQuantity = 0;
         for (String menu : menuAndQuantity.keySet()) {
             if (menuAndQuantity.get(menu) <= 0) {
@@ -96,14 +96,14 @@ public class InputView {
         }
     }
 
-    private void validateOrderWithBeverageOnly(Map<String, Integer> menuAndQuantity) {
+    private static void validateOrderWithBeverageOnly(Map<String, Integer> menuAndQuantity) {
         boolean onlyDrinkFlag = checkIfOnlyDrinks(menuAndQuantity);
         if (onlyDrinkFlag) {
             throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
         }
     }
 
-    private boolean checkIfOnlyDrinks(Map<String, Integer> menuAndQuantity) {
+    private static boolean checkIfOnlyDrinks(Map<String, Integer> menuAndQuantity) {
         List<String> drinknames = new ArrayList<>();
         drinknames.add(Menu.샴페인.getName());
         drinknames.add(Menu.레드와인.getName());
