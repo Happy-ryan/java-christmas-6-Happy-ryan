@@ -44,18 +44,6 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printOrderDetailsUnder10000(int totalOrderPrice) {
-        System.out.println("<할인 전 총주문 금액>");
-        String money = Parser.formatNumberWithThousandsSeparator(totalOrderPrice);
-        System.out.println(money + "원\n");
-        System.out.println("<증정메뉴>\n없음\n");
-        System.out.println("<혜택내역>\n없음\n");
-        System.out.println("<총혜택 금액>\n없음\n");
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(money + "원\n");
-        System.out.println("<12월 이벤츠 배지>\n없음");
-    }
-
     public static void printTotalOrderPriceMessage() {
         System.out.println(Amount.TOTAL_ORDER.getDescription());
         String money = Parser.formatNumberWithThousandsSeparator(Amount.TOTAL_ORDER.getValue());
@@ -76,19 +64,24 @@ public class OutputView {
         for (String benefitType : benefifByDate.keySet()) {
             printBenefit(benefitType, benefifByDate.get(benefitType));
         }
+        if (Amount.TOTAL_BENEFIT.getValue() == 0) {
+            System.out.println("없음");
+        }
         System.out.println();
-        printTotalBenefitAmountMessage();
     }
 
-
     private static void printBenefit(String benefitType, int benefit) {
-        if (!benefitType.equals("totalAfterExcludingGiftDiscount") && !benefitType.equals("totalBenefitAmount")) {
+        if (benefit != 0) {
             System.out.println(benefitType + " " + "-" + Parser.formatNumberWithThousandsSeparator(benefit));
         }
     }
 
     public static void printTotalBenefitAmountMessage() {
         System.out.println(Amount.TOTAL_BENEFIT.getDescription());
+        if (Amount.TOTAL_BENEFIT.getValue() == 0) {
+            System.out.println("0원\n");
+            return;
+        }
         System.out.println("-" + Parser.formatNumberWithThousandsSeparator(Amount.TOTAL_BENEFIT.getValue()));
         System.out.println();
     }
