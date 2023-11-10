@@ -27,33 +27,31 @@ public class Calculrator {
 
     public Map<String, Integer> calculateBenefitByDate() {
         Map<String, Integer> benefitByDate = new HashMap<>();
-        int totalBenefitAmount = 0;
         if (Event.CHRISTMAS.getDates().contains(day)) {
             int christmasbenefit = calculateChristmasBebefit();
-            totalBenefitAmount += christmasbenefit;
+            Amount.TOTAL_BENEFIT.increaseAmount(christmasbenefit);
             benefitByDate.put(Event.CHRISTMAS.getType(), christmasbenefit);
         }
         if (Event.WEEKDAY.getDates().contains(day) && MenuCategory.DESSERT.getCount() > 0) {
             int weekdaybenefit = calculateWeekDayBenefit();
-            totalBenefitAmount += weekdaybenefit;
+            Amount.TOTAL_BENEFIT.increaseAmount(weekdaybenefit);
             benefitByDate.put(Event.WEEKDAY.getType(), weekdaybenefit);
         }
         if (Event.WEEKEND.getDates().contains(day) && MenuCategory.MAIN.getCount() > 0) {
             int weekendbenefit = calculateWeekeendBenefit();
-            totalBenefitAmount += weekendbenefit;
+            Amount.TOTAL_BENEFIT.increaseAmount(weekendbenefit);
             benefitByDate.put(Event.WEEKEND.getType(), weekendbenefit);
         }
         if (Event.SPECIAL.getDates().contains(day)) {
             int specialbenefit = calculateSpecialBenefit();
-            totalBenefitAmount += specialbenefit;
+            Amount.TOTAL_BENEFIT.increaseAmount(specialbenefit);
             benefitByDate.put(Event.SPECIAL.getType(), specialbenefit);
         }
         if (Amount.TOTAL_ORDER.getValue() >= 120000) {
             int giftbenefit = calculateGiftBenefit();
-            totalBenefitAmount += giftbenefit;
+            Amount.TOTAL_BENEFIT.increaseAmount(giftbenefit);
             benefitByDate.put(Event.GIFT.getType(), giftbenefit);
         }
-        Amount.TOTAL_BENEFIT.increaseAmount(totalBenefitAmount);
         return benefitByDate;
     }
 
