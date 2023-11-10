@@ -31,26 +31,34 @@ public class Calculrator {
 
     public Map<String, Integer> calculateBenefitByDate() {
         Map<String, Integer> benefitByDate = new HashMap<>();
+        int totalBenefitAmoun = 0;
         if (Event.CHRISTMAS.getDates().contains(day)) {
             int christmasbenefit = calculateChristmasBebefit();
+            totalBenefitAmoun += christmasbenefit;
             benefitByDate.put(Event.CHRISTMAS.getType(), christmasbenefit);
         }
         if (Event.WEEKDAY.getDates().contains(day)) {
             int weekdaybenefit = calculateWeekDayBenefit();
+            totalBenefitAmoun += weekdaybenefit;
             benefitByDate.put(Event.WEEKDAY.getType(), weekdaybenefit);
         }
         if (Event.WEEKEND.getDates().contains(day)) {
             int weekendbenefit = calculateWeekeendBenefit();
+            totalBenefitAmoun += weekendbenefit;
             benefitByDate.put(Event.WEEKEND.getType(), weekendbenefit);
         }
         if (Event.SPECIAL.getDates().contains(day)) {
             int specialbenefit = 1000;
+            totalBenefitAmoun += specialbenefit;
             benefitByDate.put(Event.SPECIAL.getType(), specialbenefit);
         }
         if (Event.GIFT.getDates().contains(day)) {
             int giftbenefit = calculateBonusItemBenefit();
+            totalBenefitAmoun += giftbenefit;
             benefitByDate.put(Event.GIFT.getType(), giftbenefit);
         }
+        benefitByDate.put("totalBenefitAmount", totalBenefitAmoun);
+        benefitByDate.put("totalAfterExcludingGiftDiscount", totalBenefitAmoun -25000);
         return benefitByDate;
     }
 
