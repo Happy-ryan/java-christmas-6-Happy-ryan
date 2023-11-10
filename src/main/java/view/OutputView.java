@@ -43,6 +43,18 @@ public class OutputView {
         System.out.println();
     }
 
+    public static void printOrderDetailsUnder10000(int totalOrderPrice) {
+        System.out.println("<할인 전 총주문 금액>");
+        String money = Parser.formatNumberWithThousandsSeparator(totalOrderPrice);
+        System.out.println(money + "원\n");
+        System.out.println("<증정메뉴>\n없음\n");
+        System.out.println("<혜택내역>\n없음\n");
+        System.out.println("<총혜택 금액>\n없음\n");
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(money + "원\n");
+        System.out.println("<12월 이벤츠 배지>\n없음");
+    }
+
     public static void printTotalOrderPriceMessage(int totalOrderPrice) {
         System.out.println("<할인 전 총주문 금액>");
         String money = Parser.formatNumberWithThousandsSeparator(totalOrderPrice);
@@ -62,17 +74,17 @@ public class OutputView {
         System.out.println("<혜택 내역>");
     }
 
-    public static void printBenefit(int day, Map<String, Integer> order){
-        if(Event.CHRISTMAS.getDates().contains(day)){
+    public static void printBenefit(int day, Map<String, Integer> order) {
+        if (Event.CHRISTMAS.getDates().contains(day)) {
             System.out.println();
         }
-        if(Event.WEEKDAY.getDates().contains(day)){
+        if (Event.WEEKDAY.getDates().contains(day)) {
             System.out.println();
         }
-        if(Event.WEEKEND.getDates().contains(day)){
+        if (Event.WEEKEND.getDates().contains(day)) {
             System.out.println();
         }
-        if(Event.SPECIAL.getDates().contains(day)){
+        if (Event.SPECIAL.getDates().contains(day)) {
             System.out.println();
         }
     }
@@ -88,5 +100,6 @@ public class OutputView {
     public static void printEventBadgeMessage() {
         System.out.println("<12월 이벤트 배지>");
     }
+
 }
 
