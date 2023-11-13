@@ -1,116 +1,58 @@
 package utils;
 
 import amount.Amount;
+import event.Event;
 import event.EventDescription;
+import event.EventHandler;
 import menu.Menu;
 import menu.MenuCategory;
+import menu.Receipt;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 public class Calculrator {
     private final int day;
-    private final Map<String, Integer> order;
+    private final Receipt receipt;
+    private final List<Event> usableEvents;
 
-    public Calculrator(int day, Map<String, Integer> order) {
-        this.order = order;
+    public Calculrator(int day, Receipt receipt) {
         this.day = day;
-        countMainAndDessert();
+        this.receipt = receipt;
+        this.usableEvents = EventHandler.getUsableEvent(day, receipt);
     }
 
-    public int calculateTotalOrderPrice() {
-        for (String menu : order.keySet()) {
-            Amount.TOTAL_ORDER.increaseAmount(order.get(menu) * Menu.valueOf(menu).getPrice());
+    public Map<String, Integer> getBenefit() {
+        Map<String, Integer> result = new HashMap<>();
+        for (Event event : usableEvents) {
+            result.put(event.getDescription().getType(), event.getBenefit(day, receipt));
         }
-        return Amount.TOTAL_ORDER.getValue();
+        return result;
     }
 
-    public Map<String, Integer> calculateBenefitByDate() {
-        Map<String, Integer> benefitByDate = new HashMap<>();
-        if (EventDescription.CHRISTMAS.getDates().contains(day)) {
-            int christmasbenefit = calculateChristmasBebefit();
-            Amount.TOTAL_BENEFIT.increaseAmount(christmasbenefit);
-            benefitByDate.put(EventDescription.CHRISTMAS.getType(), christmasbenefit);
+    public int getTotalBenefit() {
+        int result = 0;
+        for (Map.Entry<String, Integer> m : getBenefit().entrySet()) {
+            result += m.getValue();
         }
-        if (EventDescription.WEEKDAY.getDates().contains(day) && MenuCategory.DESSERT.getCount() > 0) {
-            int weekdaybenefit = calculateWeekDayBenefit();
-            Amount.TOTAL_BENEFIT.increaseAmount(weekdaybenefit);
-            benefitByDate.put(EventDescription.WEEKDAY.getType(), weekdaybenefit);
-        }
-        if (EventDescription.WEEKEND.getDates().contains(day) && MenuCategory.MAIN.getCount() > 0) {
-            int weekendbenefit = calculateWeekeendBenefit();
-            Amount.TOTAL_BENEFIT.increaseAmount(weekendbenefit);
-            benefitByDate.put(EventDescription.WEEKEND.getType(), weekendbenefit);
-        }
-        if (EventDescription.SPECIAL.getDates().contains(day)) {
-            int specialbenefit = calculateSpecialBenefit();
-            Amount.TOTAL_BENEFIT.increaseAmount(specialbenefit);
-            benefitByDate.put(EventDescription.SPECIAL.getType(), specialbenefit);
-        }
-        if (Amount.TOTAL_ORDER.getValue() >= 120000) {
-            int giftbenefit = calculateGiftBenefit();
-            Amount.TOTAL_BENEFIT.increaseAmount(giftbenefit);
-            benefitByDate.put(EventDescription.GIFT.getType(), giftbenefit);
-        }
-        return benefitByDate;
+        return result;
     }
 
-    public void calculateDiscountedPayment() {
-        Amount.DISCOUNTED_PAYMENT.add(Amount.TOTAL_ORDER);
-
-        Amount.DISCOUNTED_PAYMENT.minus(Amount.TOTAL_BENEFIT);
-        if (Amount.TOTAL_ORDER.getValue() > 120000) {
-            Amount.DISCOUNTED_PAYMENT.increaseAmount(25000);
+    public Map<String, Integer> getDiscount() {
+        Map<String, Integer> result = new HashMap<>();
+        for (Event event : usableEvents) {
+            result.put(event.getDescription().getType(), event.getDiscount(day, receipt));
         }
+        return result;
     }
 
-    private int calculateChristmasBebefit() {
-        int christmasBenefit = 0;
-        if (Amount.TOTAL_ORDER.getValue() >= 10000) {
-            christmasBenefit = 1000 + 100 * (day - 1);
+    public int getTotalDiscount() {
+        int result = 0;
+        for (Map.Entry<String, Integer> m : getDiscount().entrySet()) {
+            result += m.getValue();
         }
-        return christmasBenefit;
-    }
-
-    private int calculateWeekDayBenefit() {
-        int weekdaybenefit = 0;
-        if (Amount.TOTAL_ORDER.getValue() >= 10000) {
-            weekdaybenefit = MenuCategory.DESSERT.getCount() * 2023;
-        }
-        return weekdaybenefit;
-    }
-
-    private int calculateWeekeendBenefit() {
-        int weekendbenefit = 0;
-        if (Amount.TOTAL_ORDER.getValue() >= 10000) {
-            weekendbenefit = MenuCategory.MAIN.getCount() * 2023;
-        }
-        return weekendbenefit;
-    }
-
-    private int calculateGiftBenefit() {
-        if (Amount.TOTAL_ORDER.getValue() >= 10000) {
-            return 25000;
-        }
-        return 0;
-    }
-
-    private int calculateSpecialBenefit() {
-        if (Amount.TOTAL_ORDER.getValue() >= 10000) {
-            return 1000;
-        }
-        return 0;
-    }
-
-    private void countMainAndDessert() {
-        for (String menu : order.keySet()) {
-            if (MenuCategory.MAIN.getMenuItems().contains(menu)) {
-                MenuCategory.MAIN.increaseCount(order.get(menu));
-            }
-            if (MenuCategory.DESSERT.getMenuItems().contains(menu)) {
-                MenuCategory.DESSERT.increaseCount(order.get(menu));
-            }
-        }
+        return result;
     }
 
 }
