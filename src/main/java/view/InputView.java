@@ -106,7 +106,7 @@ public class InputView {
 
     private static boolean checkIfOnlyDrinks(Map<String, Integer> menuAndQuantity) {
         for (String menu : menuAndQuantity.keySet()) {
-            if (!MenuCategory.DRINK.getMenuItems().contains(menu)) {
+            if (!MenuCategory.DRINK.getMenuItems().contains(Menu.valueOf(menu))) {
                 return false;
             }
         }

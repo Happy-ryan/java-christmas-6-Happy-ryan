@@ -69,9 +69,9 @@ public class OutputView {
         System.out.println(Parser.formatNumberWithThousandsSeparator(-benefit));
     }
 
-    public static void printDiscountedPayment(int discount) {
+    public static void printDiscountedPayment(int totalPrice, int discount) {
         System.out.println(Amount.DISCOUNTED_PAYMENT.getDescription());
-        System.out.println(Parser.formatNumberWithThousandsSeparator(discount));
+        System.out.println(Parser.formatNumberWithThousandsSeparator(totalPrice - discount));
     }
 
     public static void printEventBadgeMessage(int benefit) {

@@ -40,7 +40,7 @@ public class Application {
         OutputView.printTotalBenefitAmountMessage(calculator.getTotalBenefit());
         System.out.println();
 
-        OutputView.printDiscountedPayment(calculator.getTotalDiscount());
+        OutputView.printDiscountedPayment(receipt.getTotalPrice(), calculator.getTotalDiscount());
         System.out.println();
 
         OutputView.printEventBadgeMessage(calculator.getTotalBenefit());
