@@ -4,29 +4,42 @@ import java.util.List;
 import java.util.Arrays;
 
 public enum MenuCategory {
-    APPETIZER(Arrays.asList("양송이수프", "타파스", "시저샐러드"), 0),
-    MAIN(Arrays.asList("티본스테이크", "바비큐립", "해산물파스타", "크리스마스파스타"), 0),
-    DESSERT(Arrays.asList("초코케이크", "아이스크림"), 0),
-    DRINK(Arrays.asList("제로콜라", "레드와인", "샴페인"), 0);
+    UNKNOWN("unknown", Arrays.asList()),
+    APPETIZER("애피타이저", Arrays.asList(Menu.양송이수프, Menu.타파스, Menu.시저샐러드)),
+    MAIN("메인", Arrays.asList(Menu.티본스테이크, Menu.바비큐립, Menu.해산물파스타, Menu.크리스마스파스타)),
+    DESSERT("디저트", Arrays.asList(Menu.초코케이크, Menu.아이스크림)),
+    DRINK("음료", Arrays.asList(Menu.제로콜라, Menu.레드와인, Menu.샴페인));
 
-    private final List<String> menuItems;
-    private int count;
+    private final String type;
+    private final List<Menu> menuItems;
 
-    MenuCategory(List<String> menuItems, int count) {
+    MenuCategory(String type, List<Menu> menuItems) {
+        this.type = type;
         this.menuItems = menuItems;
-        this.count = count;
     }
 
-    public List<String> getMenuItems() {
+    public String getType() {
+        return type;
+    }
+
+    public List<Menu> getMenuItems() {
         return menuItems;
     }
 
-    public int getCount(){
-        return count;
-    }
-
-    public void increaseCount(int count) {
-        this.count += count;
+    public static MenuCategory getMenuCategory(Menu menu) {
+        if (APPETIZER.getMenuItems().contains(menu)) {
+            return APPETIZER;
+        }
+        if (MAIN.getMenuItems().contains(menu)) {
+            return MAIN;
+        }
+        if (DESSERT.getMenuItems().contains(menu)) {
+            return DESSERT;
+        }
+        if (DRINK.getMenuItems().contains(menu)) {
+            return DRINK;
+        }
+        return UNKNOWN;
     }
 }
 
