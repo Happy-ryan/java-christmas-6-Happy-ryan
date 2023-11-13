@@ -2,7 +2,7 @@ package event;
 
 import java.util.List;
 
-public enum Event {
+public enum EventDescription {
     CHRISTMAS("크리스마스 디데이 할인: ", 1000, EventDate.CHRISTMAS.getDates()),
     WEEKDAY("평일 할인: ", 2023, EventDate.WEEKDAY.getDates()),
     WEEKEND("주말 할인: ", 2023, EventDate.WEEKEND.getDates()),
@@ -13,7 +13,7 @@ public enum Event {
     private final int discount;
     private final List<Integer> dates;
 
-    Event(String type, int discount, List<Integer> dates) {
+    EventDescription(String type, int discount, List<Integer> dates) {
         this.type = type;
         this.discount = discount;
         this.dates = dates;

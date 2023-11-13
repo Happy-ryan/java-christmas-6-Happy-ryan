@@ -1,11 +1,8 @@
 package view;
 
 import amount.Amount;
-import event.Event;
-import menu.Menu;
 import utils.Parser;
 
-import java.text.DecimalFormat;
 import java.util.Map;
 
 public class OutputView {
