@@ -1,5 +1,6 @@
 package christmas;
 
+import menu.Receipt;
 import utils.Calculrator;
 import view.InputView;
 import view.OutputView;
@@ -16,6 +17,7 @@ public class Application {
 
         Map<String, Integer> order = InputView.readOrder();
         OutputView.printOrder(order);
+        Receipt receipt = new Receipt(order);
 
         OutputView.printEventPreviewMessage(date);
         System.out.println();
@@ -24,27 +26,23 @@ public class Application {
         OutputView.printOderMenu(order);
         System.out.println();
 
-        Calculrator calculrator = new Calculrator(date, order);
-        calculrator.calculateTotalOrderPrice();
-        Map<String, Integer> benefitByDate = calculrator.calculateBenefitByDate();
+        Calculrator calculator = new Calculrator(date, receipt);
 
-        OutputView.printTotalOrderPriceMessage();
+        OutputView.printTotalPriceMessage(receipt.getTotalPrice());
         System.out.println();
 
-        OutputView.printBonusItemMessage();
+        OutputView.printBonusItemMessage(receipt.getTotalPrice());
         System.out.println();
 
-        OutputView.printBenefitsMessage(benefitByDate);
+        OutputView.printBenefitsMessage(calculator.getBenefit());
         System.out.println();
 
-        OutputView.printTotalBenefitAmountMessage();
+        OutputView.printTotalBenefitAmountMessage(calculator.getTotalBenefit());
         System.out.println();
 
-        calculrator.calculateDiscountedPayment();
-
-        OutputView.printDiscountedPayment();
+        OutputView.printDiscountedPayment(calculator.getTotalDiscount());
         System.out.println();
 
-        OutputView.printEventBadgeMessage();
+        OutputView.printEventBadgeMessage(calculator.getTotalBenefit());
     }
 }
