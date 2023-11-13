@@ -53,7 +53,7 @@ public class OutputView {
         for (String benefitType : benefifByDate.keySet()) {
             printBenefit(benefitType, benefifByDate.get(benefitType));
         }
-        if (Amount.TOTAL_BENEFIT.getValue() == 0) {
+        if (benefifByDate.isEmpty()) {
             System.out.println("없음");
         }
     }
