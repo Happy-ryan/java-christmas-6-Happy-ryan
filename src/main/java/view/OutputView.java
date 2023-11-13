@@ -33,15 +33,15 @@ public class OutputView {
         }
     }
 
-    public static void printTotalOrderPriceMessage() {
+    public static void printTotalPriceMessage(int totalPrice) {
         System.out.println(Amount.TOTAL_ORDER.getDescription());
-        String money = Parser.formatNumberWithThousandsSeparator(Amount.TOTAL_ORDER.getValue());
+        String money = Parser.formatNumberWithThousandsSeparator(totalPrice);
         System.out.println(money);
     }
 
-    public static void printBonusItemMessage() {
+    public static void printBonusItemMessage(int totalPrice) {
         System.out.println("<증정 메뉴>");
-        if (Amount.TOTAL_ORDER.getValue() >= 120000) {
+        if (totalPrice >= 120000) {
             System.out.println("샴페인 1개");
             return;
         }
@@ -64,31 +64,27 @@ public class OutputView {
         }
     }
 
-    public static void printTotalBenefitAmountMessage() {
+    public static void printTotalBenefitAmountMessage(int benefit) {
         System.out.println(Amount.TOTAL_BENEFIT.getDescription());
-        if (Amount.TOTAL_BENEFIT.getValue() == 0) {
-            System.out.println("0원");
-            return;
-        }
-        System.out.println("-" + Parser.formatNumberWithThousandsSeparator(Amount.TOTAL_BENEFIT.getValue()));
+        System.out.println(Parser.formatNumberWithThousandsSeparator(-benefit));
     }
 
-    public static void printDiscountedPayment() {
+    public static void printDiscountedPayment(int discount) {
         System.out.println(Amount.DISCOUNTED_PAYMENT.getDescription());
-        System.out.println(Parser.formatNumberWithThousandsSeparator(Amount.DISCOUNTED_PAYMENT.getValue()));
+        System.out.println(Parser.formatNumberWithThousandsSeparator(discount));
     }
 
-    public static void printEventBadgeMessage() {
+    public static void printEventBadgeMessage(int benefit) {
         System.out.println("<12월 이벤트 배지>");
-        if (5000 <= Amount.TOTAL_BENEFIT.getValue() && Amount.TOTAL_BENEFIT.getValue() < 10000) {
+        if (5000 <= benefit && benefit < 10000) {
             System.out.println("별");
             return;
         }
-        if (10000 <= Amount.TOTAL_BENEFIT.getValue() && Amount.TOTAL_BENEFIT.getValue() < 20000) {
+        if (10000 <= benefit && benefit < 20000) {
             System.out.println("트리");
             return;
         }
-        if (20000 <= Amount.TOTAL_BENEFIT.getValue()) {
+        if (20000 <= benefit) {
             System.out.println("산타");
             return;
         }
