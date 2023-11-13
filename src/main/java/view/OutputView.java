@@ -60,7 +60,7 @@ public class OutputView {
 
     private static void printBenefit(String benefitType, int benefit) {
         if (benefit != 0) {
-            System.out.println(benefitType + " " + "-" + Parser.formatNumberWithThousandsSeparator(benefit));
+            System.out.println(benefitType + ": " + "-" + Parser.formatNumberWithThousandsSeparator(benefit));
         }
     }
 

@@ -3,11 +3,11 @@ package event;
 import java.util.List;
 
 public enum EventDescription {
-    CHRISTMAS("크리스마스 디데이 할인: ", 1000, 1000, EventDate.CHRISTMAS.getDates()),
-    WEEKDAY("평일 할인: ", 2023, 2023, EventDate.WEEKDAY.getDates()),
-    WEEKEND("주말 할인: ", 2023, 2023, EventDate.WEEKEND.getDates()),
-    SPECIAL("특별 할인: ", 1000, 1000, EventDate.SPECIAL.getDates()),
-    GIFT("증정 이벤트:", 25000, 0, EventDate.GIFT.getDates());
+    CHRISTMAS("크리스마스 디데이 할인", 1000, 1000, EventDate.CHRISTMAS.getDates()),
+    WEEKDAY("평일 할인", 2023, 2023, EventDate.WEEKDAY.getDates()),
+    WEEKEND("주말 할인", 2023, 2023, EventDate.WEEKEND.getDates()),
+    SPECIAL("특별 할인", 1000, 1000, EventDate.SPECIAL.getDates()),
+    GIFT("증정 이벤트", 25000, 0, EventDate.GIFT.getDates());
 
     private final String type;
     private final int benefit;
