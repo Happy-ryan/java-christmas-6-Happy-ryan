@@ -2,8 +2,8 @@ package event;
 
 import menu.Receipt;
 
-public class ChristmasEvent extends Event{
-    public ChristmasEvent(){
+public class ChristmasEvent extends Event {
+    public ChristmasEvent() {
         super(EventDescription.CHRISTMAS);
     }
 
@@ -15,6 +15,7 @@ public class ChristmasEvent extends Event{
     public int getBenefit(int day, Receipt receipt) {
         return getDescription().getBenefit() + 100 * (day - 1);
     }
+
     public int getDiscount(int day, Receipt receipt) {
         return getDescription().getDiscount() + 100 * (day - 1);
     }
