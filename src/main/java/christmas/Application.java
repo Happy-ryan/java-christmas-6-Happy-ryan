@@ -1,7 +1,7 @@
 package christmas;
 
 import menu.Receipt;
-import utils.Calculrator;
+import utils.Calculator;
 import view.InputView;
 import view.OutputView;
 
@@ -26,7 +26,7 @@ public class Application {
         OutputView.printOderMenu(order);
         System.out.println();
 
-        Calculrator calculator = new Calculrator(date, receipt);
+        Calculator calculator = new Calculator(date, receipt);
 
         OutputView.printTotalPriceMessage(receipt.getTotalPrice());
         System.out.println();

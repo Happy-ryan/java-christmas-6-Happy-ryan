@@ -1,23 +1,19 @@
 package utils;
 
-import amount.Amount;
 import event.Event;
-import event.EventDescription;
 import event.EventHandler;
-import menu.Menu;
-import menu.MenuCategory;
 import menu.Receipt;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
-public class Calculrator {
+public class Calculator {
     private final int day;
     private final Receipt receipt;
     private final List<Event> usableEvents;
 
-    public Calculrator(int day, Receipt receipt) {
+    public Calculator(int day, Receipt receipt) {
         this.day = day;
         this.receipt = receipt;
         this.usableEvents = EventHandler.getUsableEvent(day, receipt);
