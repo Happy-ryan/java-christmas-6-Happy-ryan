@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Receipt {
-    int totalPrice = 0;
-    Map<Menu, Integer> orderedMenu;
-    Map<MenuCategory, Integer> orderedMenuCategory;
+    private int totalPrice = 0;
+    private Map<Menu, Integer> orderedMenu;
+    private Map<MenuCategory, Integer> orderedMenuCategory;
 
     public Receipt(Map<String, Integer> order) {
         this.orderedMenu = new HashMap<>();
@@ -16,7 +16,7 @@ public class Receipt {
         }
     }
 
-    public void addMenu(Menu menu, int count) {
+    private void addMenu(Menu menu, int count) {
         totalPrice += menu.getPrice() * count;
         if (!orderedMenu.containsKey(menu)) {
             orderedMenu.put(menu, 0);
