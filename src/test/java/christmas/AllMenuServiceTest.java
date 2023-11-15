@@ -7,7 +7,7 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ServiceByDateTest extends NsTest {
+class AllMenuServiceTest extends NsTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @DisplayName("전 메뉴 + 평일 할인 + 증정이벤트")
