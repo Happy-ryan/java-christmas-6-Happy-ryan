@@ -1,6 +1,7 @@
 package view;
 
 import amount.Amount;
+import inventory.Gift;
 import utils.Parser;
 
 import java.util.Map;
@@ -41,7 +42,7 @@ public class OutputView {
 
     public static void printGiftItemMessage(int totalPrice) {
         System.out.println("<증정 메뉴>");
-        if (totalPrice >= 120000) {
+        if (totalPrice >= Gift.CHAMPAGNE.getMinimumOrderAmount()) {
             System.out.println("샴페인 1개");
             return;
         }
