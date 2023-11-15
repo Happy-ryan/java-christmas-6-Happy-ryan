@@ -76,22 +76,6 @@ public class OutputView {
         System.out.println(Parser.formatNumberWithThousandsSeparator(totalPrice - discount));
     }
 
-//        public static void printEventBadgeMessage(int benefit) {
-//        System.out.println("<12월 이벤트 배지>");
-//        if (5000 <= benefit && benefit < 10000) {
-//            System.out.println("별");
-//            return;
-//        }
-//        if (10000 <= benefit && benefit < 20000) {
-//            System.out.println("트리");
-//            return;
-//        }
-//        if (20000 <= benefit) {
-//            System.out.println("산타");
-//            return;
-//        }
-//        System.out.println("없음");
-//    }
     public static void printEventBadgeMessage(int benefit) {
         System.out.println("<12월 이벤트 배지>");
         Badge badge = Badge.getBadgeForBenefit(benefit);
