@@ -39,7 +39,7 @@ public class OutputView {
         System.out.println(money);
     }
 
-    public static void printBonusItemMessage(int totalPrice) {
+    public static void printGiftItemMessage(int totalPrice) {
         System.out.println("<증정 메뉴>");
         if (totalPrice >= 120000) {
             System.out.println("샴페인 1개");

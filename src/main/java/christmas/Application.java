@@ -31,7 +31,7 @@ public class Application {
         OutputView.printTotalPriceMessage(receipt.getTotalPrice());
         System.out.println();
 
-        OutputView.printBonusItemMessage(receipt.getTotalPrice());
+        OutputView.printGiftItemMessage(receipt.getTotalPrice());
         System.out.println();
 
         OutputView.printBenefitsMessage(calculator.getBenefit());
