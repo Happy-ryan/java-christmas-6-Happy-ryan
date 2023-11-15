@@ -34,18 +34,30 @@ public class Receipt {
     }
 
     public int getAppetizerCount() {
-        return orderedMenuCategory.get(MenuCategory.APPETIZER);
+        if (orderedMenuCategory.containsKey(MenuCategory.APPETIZER)) {
+            return orderedMenuCategory.get(MenuCategory.APPETIZER);
+        }
+        return 0;
     }
 
     public int getMainCount() {
-        return orderedMenuCategory.get(MenuCategory.MAIN);
+        if (orderedMenuCategory.containsKey(MenuCategory.MAIN)) {
+            return orderedMenuCategory.get(MenuCategory.MAIN);
+        }
+        return 0;
     }
 
     public int getDessertCount() {
-        return orderedMenuCategory.get(MenuCategory.DESSERT);
+        if (orderedMenuCategory.containsKey(MenuCategory.DESSERT)) {
+            return orderedMenuCategory.get(MenuCategory.DESSERT);
+        }
+        return 0;
     }
 
     public int getDrinkCount() {
-        return orderedMenuCategory.get(MenuCategory.DRINK);
+        if (orderedMenuCategory.containsKey(MenuCategory.DRINK)) {
+            return orderedMenuCategory.get(MenuCategory.DRINK);
+        }
+        return 0;
     }
 }
