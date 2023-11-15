@@ -1,5 +1,6 @@
 package event;
 
+import inventory.Gift;
 import menu.Receipt;
 
 public class GiftEvent extends Event {
@@ -9,7 +10,7 @@ public class GiftEvent extends Event {
 
     @Override
     public boolean tryUse(int day, Receipt receipt) {
-        return super.tryUse(day, receipt) && receipt.getTotalPrice() >= 120000;
+        return super.tryUse(day, receipt) && receipt.getTotalPrice() >= Gift.CHAMPAGNE.getMinimumOrderAmount();
     }
 
     public int getBenefit(int day, Receipt receipt) {
